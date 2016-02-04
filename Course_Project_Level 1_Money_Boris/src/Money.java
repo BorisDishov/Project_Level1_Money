@@ -4,11 +4,12 @@ import java.util.Scanner;
 public class Money {
 	
 	 static boolean veryFirstPrint = true;
+	 static int tests;
 
 	public static void main(String[] args) {
 
 		ArrayList<ArrayList<Integer>> moneyDeposits = new ArrayList<ArrayList<Integer>>();
-		int tests = getInput(moneyDeposits);
+		getInput(moneyDeposits);
 		for (int i = 0; i < tests; i++) {
 			printAnswer(moneyDeposits.get(i));
 		}
@@ -44,9 +45,9 @@ public class Money {
 		}
 	}
 
-	public static int getInput(ArrayList<ArrayList<Integer>> moneyDeposits) {
+	public static void getInput(ArrayList<ArrayList<Integer>> moneyDeposits) {
 		Scanner input = new Scanner(System.in);
-		int tests = input.nextInt();
+		tests = input.nextInt();
 		for (int i = 0; i < tests; i++) {
 			moneyDeposits.add(new ArrayList<Integer>());
 			int deposits = input.nextInt();
@@ -59,7 +60,6 @@ public class Money {
 			}
 		}
 		input.close();
-		return tests;
 	}
 
 }
