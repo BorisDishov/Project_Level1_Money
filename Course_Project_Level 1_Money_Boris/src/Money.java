@@ -2,31 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Money {
+	
+	 static boolean veryFirstPrint = true;
 
 	public static void main(String[] args) {
 
 		Scanner input = new Scanner(System.in);
 		ArrayList<ArrayList<Integer>> moneyDeposits = new ArrayList<ArrayList<Integer>>();
 		int tests = input.nextInt();
-		for (int i = 0; i < tests; i++) {
-			moneyDeposits.add(new ArrayList<Integer>());
-			int deposits = input.nextInt();
-			for (int j = 0; j < deposits; j++) {
-				if (input.nextInt() == 1) {
-					moneyDeposits.get(i).add(input.nextInt());
-				} else {
-					moneyDeposits.get(i).add(Integer.MIN_VALUE);
-				}
-			}
-		}
+		getInput(moneyDeposits, tests, input);
 		input.close();
-		int i = 0;
-		for (i = 0; i < tests - 1; i++) {
-			if (printAnswer(moneyDeposits.get(i))) {
-				System.out.println("\n");
-			}
+		for (int i = 0; i < tests; i++) {
+			printAnswer(moneyDeposits.get(i));
 		}
-		printAnswer(moneyDeposits.get(i));
 	}
 
 	public static int getMax(ArrayList<Integer> values, int endIndex) {
@@ -41,19 +29,36 @@ public class Money {
 		return values.remove(indexToDelete);
 	}
 
-	public static boolean printAnswer(ArrayList<Integer> values) {
-		boolean firstPrint = true;
+	public static void printAnswer(ArrayList<Integer> values) {
+		boolean firstPrintOfTheTest = true;
 		for (int i = 0; i < values.size(); i++) {
 			if (values.get(i) == Integer.MIN_VALUE) {
-				if (firstPrint) {
-					firstPrint = false;
+				if (firstPrintOfTheTest) {
+					if (!veryFirstPrint) {
+						System.out.println("\n");
+					}
+					veryFirstPrint = false;
+					firstPrintOfTheTest = false;
 				} else {
 					System.out.println();
 				}
 				System.out.print(getMax(values, i--));
 			}
 		}
-		return !firstPrint;
+	}
+
+	public static void getInput(ArrayList<ArrayList<Integer>> moneyDeposits, int tests, Scanner input) {
+		for (int i = 0; i < tests; i++) {
+			moneyDeposits.add(new ArrayList<Integer>());
+			int deposits = input.nextInt();
+			for (int j = 0; j < deposits; j++) {
+				if (input.nextInt() == 1) {
+					moneyDeposits.get(i).add(input.nextInt());
+				} else {
+					moneyDeposits.get(i).add(Integer.MIN_VALUE);
+				}
+			}
+		}
 	}
 
 }
