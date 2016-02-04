@@ -7,11 +7,8 @@ public class Money {
 
 	public static void main(String[] args) {
 
-		Scanner input = new Scanner(System.in);
 		ArrayList<ArrayList<Integer>> moneyDeposits = new ArrayList<ArrayList<Integer>>();
-		int tests = input.nextInt();
-		getInput(moneyDeposits, tests, input);
-		input.close();
+		int tests = getInput(moneyDeposits);
 		for (int i = 0; i < tests; i++) {
 			printAnswer(moneyDeposits.get(i));
 		}
@@ -47,7 +44,9 @@ public class Money {
 		}
 	}
 
-	public static void getInput(ArrayList<ArrayList<Integer>> moneyDeposits, int tests, Scanner input) {
+	public static int getInput(ArrayList<ArrayList<Integer>> moneyDeposits) {
+		Scanner input = new Scanner(System.in);
+		int tests = input.nextInt();
 		for (int i = 0; i < tests; i++) {
 			moneyDeposits.add(new ArrayList<Integer>());
 			int deposits = input.nextInt();
@@ -59,6 +58,8 @@ public class Money {
 				}
 			}
 		}
+		input.close();
+		return tests;
 	}
 
 }
